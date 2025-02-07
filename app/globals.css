@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+}
+
+.colorYellow {
+  background-color: #F8EA67;
+}
+
+.mainContent {
+  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
+}
+
+.cardContent {
+  min-height: 40vh;
+  max-height: 40vh
+}

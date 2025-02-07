@@ -1,0 +1,9 @@
+.myTr:nth-child(odd) {
+    background-color: #ffffff;
+    /* Optional, to set a different color for odd rows */
+}
+
+.newItemInput {
+    width: 100%;
+    box-sizing: border-box;
+}
