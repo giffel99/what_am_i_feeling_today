@@ -9,7 +9,7 @@ interface ResponseData {
 }
 
 // /api/restaurants/:address/:radius
-export async function GET(req: NextRequest, res: NextApiResponse<ResponseData>) {
+export async function GET(req: NextRequest) {
 
 
     const address = req.nextUrl?.searchParams?.get('address')

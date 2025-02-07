@@ -8,7 +8,7 @@ import Choices from './components/listOfChoices/Choices'
 
 export default function Home() {
 
-  const mockRestaruants = ['pizza', 'pie', 'burger', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+  const mockRestaruants = ['pizza', 'pie', 'burger']
   const [restaurants, setRestaurants] = useState<Array<string>>(mockRestaruants);
 
   const fetchRestaurants = async (filterParams: IFilterParameters) => {
