@@ -12,15 +12,12 @@ export default function Home() {
   const [restaurants, setRestaurants] = useState<Array<string>>(mockRestaruants);
 
   const fetchRestaurants = async (filterParams: IFilterParameters) => {
-    console.log("Fetching data and populating the list")
     filterParams.address.trim();
-    console.log(filterParams)
     const result = await getNearbyRestaurants(filterParams);
     setRestaurants(result)
   }
 
   const removeItemFromRestaurants = (index: number) => {
-    console.log(index)
     setRestaurants((previous) => {
       return previous.filter((_, i) => { return i != index });
     })
@@ -28,13 +25,12 @@ export default function Home() {
 
 
   async function getNearbyRestaurants(filterParams: IFilterParameters): Promise<Array<string>> {
-    const address = filterParams.address;
-    const radius = String(filterParams.radius);
-    const priceRange = filterParams.priceRange;
 
     const result = await fetch('http://localhost:3000/api/restaurants?' + new URLSearchParams({
-      address: address,
-      radius: radius
+      address: filterParams.address.trim(),
+      radius: String(filterParams.radius),
+      minPrice: filterParams.minPrice,
+      maxPrice: filterParams.maxPrice
     }).toString()).then((response) => {
       if (!response.ok) {
         console.log("I was unable to find data")
@@ -45,7 +41,6 @@ export default function Home() {
       }
     })
     const data: Array<string> = await result;
-    console.log(data)
     return data;
 
   }

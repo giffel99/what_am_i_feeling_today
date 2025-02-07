@@ -9,5 +9,6 @@ export interface IRestaurantRequest {
 export interface IFilterParameters {
     radius: number, // 1000 meter
     address: string, // Kemivägen... 
-    priceRange: priceOptions
+    minPrice: priceOptions,
+    maxPrice: priceOptions
 }

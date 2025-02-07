@@ -13,7 +13,8 @@ const Options = ({ sendInputData }: OptionsProps) => {
     const [filterParameters, setFilterParameters] = useState<IFilterParameters>({
         radius: 1000,
         address: "",
-        priceRange: "Billigare"
+        minPrice: "Billigast",
+        maxPrice: "Billigare"
     })
     return (
         <div >
@@ -31,11 +32,18 @@ const Options = ({ sendInputData }: OptionsProps) => {
                     </label>
                     <p className="ml-2 text-right">(meter)</p>
                 </div>
-                <p>Vilken prisklass?</p>
-                <select className="select select-bordered  max-w-xs" onChange={(e) => setFilterParameters((previous) => ({ ...previous, priceRange: e.target.value as priceOptions }))} >
-                    <option disabled value="DEFAULT">Välj prisklass</option>
-                    {priceOptions.map((option, index) => { return <option key={index}>{option}</option> })}
-                </select>
+                <p>Hur billigt får det vara?</p>
+                <div className="grid grid-cols-2  ">
+                    <select className="select select-bordered  max-w-xs" onChange={(e) => setFilterParameters((previous) => ({ ...previous, minPrice: e.target.value as priceOptions }))} >
+                        <option disabled value="DEFAULT">Välj prisklass</option>
+                        {priceOptions.map((option, index) => { return <option key={index}>{option}</option> })}
+                    </select>
+
+                    <select className="select select-bordered  max-w-xs" onChange={(e) => setFilterParameters((previous) => ({ ...previous, maxPrice: e.target.value as priceOptions }))} >
+                        <option disabled value="DEFAULT">Välj prisklass</option>
+                        {priceOptions.map((option, index) => { return <option key={index}>{option}</option> })}
+                    </select>
+                </div>
             </div><div className="flex flex-col items-center my-8  ">
                 <button className=" bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded " onClick={() => sendInputData(filterParameters)}>
                     Hämta Data
