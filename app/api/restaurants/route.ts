@@ -19,7 +19,6 @@ const headers = {
   "Access-Control-Allow-Origin": "*", // Change '*' to your frontend domain for production
   "Access-Control-Allow-Methods": "GET, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
-  'allow'
 };
 
 export async function GET(req: NextRequest) {
