@@ -27,6 +27,6 @@ body {
 }
 
 .cardContent {
-  min-height: 40vh;
-  max-height: 40vh
+  min-height: 60vh;
+  max-height: 60vh
 }

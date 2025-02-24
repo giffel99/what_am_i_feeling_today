@@ -15,42 +15,54 @@ interface ResponseData {
     restaurants?: Array<string>
     error?: string
 }
-
-// /api/restaurants/:address/:radius
 export async function GET(req: NextRequest) {
+    // Add CORS headers
+    const headers = {
+        "Access-Control-Allow-Origin": "*", // Change '*' to your frontend domain for production
+        "Access-Control-Allow-Methods": "GET, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    };
 
-    const address = req.nextUrl?.searchParams?.get('address')
-    const radius = req.nextUrl?.searchParams?.get('radius')
-    const minPriceString = req.nextUrl?.searchParams?.get('minPrice') as priceOptions;
-    const maxPriceString = req.nextUrl?.searchParams?.get('maxPrice') as priceOptions;
-    if (!address || !radius || !minPriceString || !maxPriceString) {
-        return NextResponse.json({ error: "address or radius not provided" }, { status: 404 });
+    if (req.method === "OPTIONS") {
+        return new NextResponse(null, { status: 200, headers });
     }
 
-    // Convert the strings to number for google API
+    const address = req.nextUrl?.searchParams?.get("address");
+    const radius = req.nextUrl?.searchParams?.get("radius");
+    const minPriceString = req.nextUrl?.searchParams?.get("minPrice") as priceOptions;
+    const maxPriceString = req.nextUrl?.searchParams?.get("maxPrice") as priceOptions;
+
+    if (!address || !radius || !minPriceString || !maxPriceString) {
+        return new NextResponse(JSON.stringify({ error: "address or radius not provided" }), { status: 404, headers });
+    }
+
     const minPriceNumber = priceMap[minPriceString];
     const maxPriceNumber = priceMap[maxPriceString];
-
     const apiKey = process.env.GOOGLE_API_KEY;
-    // Optionally validate the parameters (for safety and type-checking)
-    // Get the coords of the address
-    // https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
-    const geoResponse = await fetch(`${googleURL}/geocode/json?address=${address}&key=${apiKey}&result_type=street_address`)
-    let geoData = await geoResponse.json();
-    let latitude = geoData.results[0].geometry.location.lat;
-    let longitude = geoData.results[0].geometry.location.lng;
-    if (!latitude || !longitude) {
-        return NextResponse.json({ error: "Unable to get the lats and long from address" }, { status: 404 });
+    const googleURL = "https://maps.googleapis.com/maps/api"; // Ensure this variable is defined
+
+    try {
+        // Get coordinates
+        const geoResponse = await fetch(`${googleURL}/geocode/json?address=${address}&key=${apiKey}&result_type=street_address`);
+        let geoData = await geoResponse.json();
+        
+        if (!geoData.results?.length) {
+            return new NextResponse(JSON.stringify({ error: "Unable to get lat/lng from address" }), { status: 404, headers });
+        }
+
+        let latitude = geoData.results[0].geometry.location.lat;
+        let longitude = geoData.results[0].geometry.location.lng;
+
+        // Fetch restaurants
+        const response = await fetch(
+            `${googleURL}/place/nearbysearch/json?keyword=restaurant&location=${latitude},${longitude}&radius=${radius}&type=restaurant&key=${apiKey}&minprice=${minPriceNumber}&maxprice=${maxPriceNumber}`
+        );
+        let restaurantsData = await response.json();
+
+        const restaurantNames = restaurantsData.results.map((restaurant: { name: any }) => restaurant.name);
+
+        return new NextResponse(JSON.stringify(restaurantNames), { status: 200, headers });
+    } catch (error) {
+        return new NextResponse(JSON.stringify({ error: "Something went wrong" }), { status: 500, headers });
     }
-    // Mamma, Pappa, Emma, Josse, lukas, Sven, Lovisa 
-    const response = await fetch(
-        `${googleURL}/place/nearbysearch/json?keyword=restaurant&location=${latitude}%2C${longitude}&radius=${radius}&type=restaurant&key=${apiKey}&minprice=${minPriceNumber}&maxprice=${maxPriceNumber}`
-    );
-    let restaurantsData = await response.json()
-
-    const restaurantNames = restaurantsData.results.map((restaurant: { name: any; }) => {
-        return restaurant.name;
-    })
-    return NextResponse.json(restaurantNames);
-
 }
