@@ -32,7 +32,7 @@ export default function Home() {
     filterParams: IFilterParameters
   ): Promise<Array<string>> {
     const result = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/restaurants?` +
+      "/api/restaurants?" +
         new URLSearchParams({
           address: filterParams.address.trim(),
           radius: String(filterParams.radius),
