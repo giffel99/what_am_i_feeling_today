@@ -95,7 +95,7 @@ const Wheel = ({ restaurants }: WheelProps) => {
         >
           Snurra hjulet!
         </button>
-        <p>Inte nöjd? Snurra igen!</p>
+        <p>Inte nöjd? Snurra igen!!</p>
       </div>
     </div>
   );
