@@ -16,17 +16,51 @@ body {
   color: rgb(var(--foreground-rgb));
 }
 
-.colorYellow {
-  background-color: #F8EA67;
-}
-
 .mainContent {
-  min-height: 100vh;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
   height: 100vh;
-  max-height: 100vh;
 }
 
-.cardContent {
-  min-height: 60vh;
-  max-height: 60vh
+.setup-page {
+  background-color: rgba(165, 226, 154, 0.5);
+  height: calc(100vh - 4rem);
+  width: 100vw;
+  scroll-snap-align: start;
+}
+
+.list-page {
+  background-color: rgba(154, 191, 226, 0.5);
+  height: calc(100vh - 4rem);
+  width: 100vw;
+  scroll-snap-align: start;
+}
+
+.spin-page {
+  background-color: rgba(226, 175, 154, 0.5);
+  height: calc(100vh - 4rem);
+  width: 100vw;
+  scroll-snap-align: start;
+}
+
+.card-content {
+  padding: 2rem;
+  height: 75%;
+  min-width: 25%;
+  max-width: 40%;
+  margin: auto;
+  margin-top: 2rem;
+  border-radius: 24px;
+}
+
+.options-content {
+  background-color: rgba(165, 226, 154, 1);
+}
+
+.list-content {
+  background-color: rgba(154, 191, 226, 1);
+}
+
+.spin-content {
+  background-color: rgba(226, 175, 154, 1);
 }
