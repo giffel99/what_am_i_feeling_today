@@ -9,7 +9,6 @@ import DrawIcon from "@mui/icons-material/Draw";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import CasinoIcon from "@mui/icons-material/Casino";
 import Navigation from "./components/navigation/Navigation";
-
 export default function Home() {
   const mockRestaruants = ["pizza", "pie", "burger"];
   const [restaurants, setRestaurants] =
@@ -33,7 +32,7 @@ export default function Home() {
     filterParams: IFilterParameters
   ): Promise<Array<string>> {
     const result = await fetch(
-      "http://localhost:3000/api/restaurants?" +
+      `${process.env.NEXT_PUBLIC_API_URL}/api/restaurants?` +
         new URLSearchParams({
           address: filterParams.address.trim(),
           radius: String(filterParams.radius),
