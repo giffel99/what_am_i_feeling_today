@@ -1,5 +1,4 @@
 import { priceOptions } from "@/app/interfaces";
-import type { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
 
 const googleURL = "https://maps.googleapis.com/maps/api";
@@ -15,15 +14,15 @@ interface ResponseData {
   restaurants?: Array<string>;
   error?: string;
 }
+
+const headers = {
+  "Access-Control-Allow-Origin": "https://what-am-i-feeling-today.vercel.app", // Change '*' to your frontend domain for production
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+};
+
 export async function GET(req: NextRequest) {
   // Add CORS headers
-  const headers = {
-    "Access-Control-Allow-Origin":
-      "https://what-am-i-feeling-today.vercel.app/", // Change '*' to your frontend domain for production
-    "Access-Control-Allow-Methods": "GET, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization",
-  };
-
   if (req.method === "OPTIONS") {
     return new NextResponse(null, { status: 200, headers });
   }
@@ -47,7 +46,6 @@ export async function GET(req: NextRequest) {
   const minPriceNumber = priceMap[minPriceString];
   const maxPriceNumber = priceMap[maxPriceString];
   const apiKey = process.env.GOOGLE_API_KEY;
-  const googleURL = "https://maps.googleapis.com/maps/api"; // Ensure this variable is defined
 
   try {
     // Get coordinates
