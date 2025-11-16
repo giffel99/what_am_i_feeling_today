@@ -59,7 +59,7 @@ export default function Home() {
   };
 
   return (
-    <main className="mainContent">
+    <main className="mainContent  text-base-content">
       <div id="options-page" className="setup-page">
         <h1 className="text-3xl text-center pt-4">
           Svårt att bestämma vad du ska äta idag?

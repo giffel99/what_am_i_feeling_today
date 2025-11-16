@@ -53,7 +53,6 @@ export async function GET(req: NextRequest) {
       `${googleURL}/geocode/json?address=${address}&key=${apiKey}&result_type=street_address`
     );
     let geoData = await geoResponse.json();
-
     if (!geoData.results?.length) {
       return new NextResponse(
         JSON.stringify({ error: "Unable to get lat/lng from address" }),

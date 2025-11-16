@@ -25,21 +25,21 @@ body {
 .setup-page {
   background-color: rgba(165, 226, 154, 0.5);
   height: calc(100vh - 4rem);
-  width: 100vw;
+  width: 99vw;
   scroll-snap-align: start;
 }
 
 .list-page {
   background-color: rgba(154, 191, 226, 0.5);
   height: calc(100vh - 4rem);
-  width: 100vw;
+  width: 99vw;
   scroll-snap-align: start;
 }
 
 .spin-page {
   background-color: rgba(226, 175, 154, 0.5);
   height: calc(100vh - 4rem);
-  width: 100vw;
+  width: 99vw;
   scroll-snap-align: start;
 }
 
