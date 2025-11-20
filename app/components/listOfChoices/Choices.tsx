@@ -46,15 +46,15 @@ const Choices = ({
                   className={`p-3.5 w-full ${styles.myInput}`}
                   type="text"
                   placeholder="Lägg in egen address här"
-                  value={newItem} // Bind the input to the newItem state
-                  onChange={(e) => setNewItem(e.target.value)} // Update newItem as you type
+                  value={newItem}
+                  onChange={(e) => setNewItem(e.target.value)}
                 />
               </td>
               <td className="text-right">
                 <button
                   onClick={() => {
-                    onAddItemClick(newItem); // Call the onAddItemClick function with the new item
-                    setNewItem(""); // Reset the newItem state after clicking
+                    onAddItemClick(newItem);
+                    setNewItem("");
                   }}
                 >
                   <AddIcon className="text-blue-600" />

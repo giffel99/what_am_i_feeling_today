@@ -10,19 +10,13 @@ const priceMap: Record<priceOptions, number> = {
   Dyrast: 3,
 };
 
-interface ResponseData {
-  restaurants?: Array<string>;
-  error?: string;
-}
-
 const headers = {
-  "Access-Control-Allow-Origin": "*", // Change '*' to your frontend domain for production
+  "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
 };
 
 export async function GET(req: NextRequest) {
-  // Add CORS headers
   if (req.method === "OPTIONS") {
     return new NextResponse(null, { status: 200, headers });
   }

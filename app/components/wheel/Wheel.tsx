@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import styles from "./Wheel.module.css";
 interface WheelProps {
   restaurants: Array<string>;
 }
@@ -23,15 +22,13 @@ const Wheel = ({ restaurants }: WheelProps) => {
         });
 
         if (spinCountDown === 0) {
-          clearInterval(intervalId); // Stop the interval
-          resolve(); // Resolve the promise when the spin is complete
+          clearInterval(intervalId);
+          resolve();
         }
 
         spinCountDown--;
-      }, 100); // Interval set to 100ms for quicker visual change
+      }, 100);
     });
-
-    // Since state is updated asynchronously, we use `chosenIndex` for logging the chosen restaurant
   };
 
   return (

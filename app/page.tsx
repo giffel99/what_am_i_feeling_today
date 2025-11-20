@@ -5,9 +5,6 @@ import Footer from "./components/footer/Footer";
 import Options from "./components/options/Options";
 import { IFilterParameters } from "./interfaces";
 import Choices from "./components/listOfChoices/Choices";
-import DrawIcon from "@mui/icons-material/Draw";
-import ListAltIcon from "@mui/icons-material/ListAlt";
-import CasinoIcon from "@mui/icons-material/Casino";
 import Navigation from "./components/navigation/Navigation";
 export default function Home() {
   const mockRestaruants = ["pizza", "pie", "burger"];
@@ -41,7 +38,7 @@ export default function Home() {
         }).toString()
     ).then((response) => {
       if (!response.ok) {
-        console.log("I was unable to find data");
+        console.log("Unable to find data.");
         return [];
       } else {
         return response.json();
@@ -60,6 +57,7 @@ export default function Home() {
 
   return (
     <main className="mainContent  text-base-content">
+      {/* OPTIONS PAGE */}
       <div id="options-page" className="setup-page">
         <h1 className="text-3xl text-center pt-4">
           Svårt att bestämma vad du ska äta idag?
@@ -67,12 +65,14 @@ export default function Home() {
         <h3 className="text-center text-xl">
           Varför inte låta turen bestämma?
         </h3>
-        <Options sendInputData={fetchRestaurants} />
 
+        {/* CONTENT */}
+        <Options sendInputData={fetchRestaurants} />
         <Navigation highlightedName="options-page" onClick={scrollToSection} />
       </div>
       <Footer />
 
+      {/* LIST PAGE */}
       <div id="list-page" className="list-page">
         <h1 className="text-3xl text-center pt-4">
           Svårt att bestämma vad du ska äta idag?
@@ -94,6 +94,7 @@ export default function Home() {
       </div>
       <Footer />
 
+      {/* SPIN PAGE */}
       <div id="spin-page" className="spin-page">
         <h1 className="text-3xl text-center pt-4">
           Svårt att bestämma vad du ska äta idag?

@@ -17,7 +17,7 @@ const Footer = () => {
         </svg>
         <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
       </aside>
-      <span className="">
+      <span>
         Skapad av Pär för Pär med hjälp av Pär för att kunna bestämma vad han
         ska äta
       </span>

@@ -1,4 +1,10 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Working name: What am I feeling today
+
+This is a simple Next.Js application that uses google maps API to find restaurants near you. Of course it is just as easy to go to google maps and look for restaurants close by...
+
+HOWEVER, this app removes the pain of picking a place and instead lets [lady Fortuna](https://en.wikipedia.org/wiki/Fortuna) decide.
+
+You can find the page deployed to: [https://what-am-i-feeling-today.vercel.app/](https://what-am-i-feeling-today.vercel.app/)
 
 ## Getting Started
 
@@ -11,6 +17,19 @@ yarn dev
 # or
 pnpm dev
 ```
+
+## TODO
+
+- [x] Set a limit to number of requests you can send.
+- [x] Publish page to vercel.
+- [ ] Completely update the design.
+- [ ] Link to a real URL
+- [ ] Provide the route to the restaurant. AND show on map
+- [ ] Show a map of the restaurants
+
+## Next.js and vercel related
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
